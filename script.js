@@ -1,33 +1,34 @@
-function getComputerChoice(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
+function playRound(playerSelection) {
+    const choice = ["rock", "paper", "scissors"];
+    const computerSelection = choice[Math.floor(Math.random() * choice.length)];
+    
+    console.log("Player:", playerSelection);
+    console.log("Computer:", computerSelection);
 
-function getHumanChoice() {
-    let choice = parseInt(prompt("Give me a integer between 1 and 3 (Rock, Paper, Scissors): "));
-    return choice
-}
-
-let humanScore = 0;
-let computerScore = 0;
-
-function playRound(humanChoice, computerChoice) {
-    if (
-        (humanChoice === 1 && computerChoice === 3) ||
-        (humanChoice == 2 && computerChoice == 1) ||
-        (humanChoice == 3 && computerChoice == 2)
-    ){
-        console.log("You win this round!");
-        humanScore++;
-    } else if (humanChoice == computerChoice) {
-        console.log("It's a tie!")
+    if (playerSelection === computerSelection) {
+        console.log("It's a tie!");
+    } else if (
+        (playerSelection === "rock" && computerSelection === "scissors") ||
+        (playerSelection === "paper" && computerSelection === "rock") ||
+        (playerSelection === "scissors" && computerSelection === "paper")
+    ) {
+        console.log("You win!");
     } else {
-        console.log("Computer wins this round!"):
-        computerScore++;
+        console.log("You lose!");
     }
-
-    console.log(`Human: ${humanScore} | Computer: ${computerScore}`);
 }
 
-let humanChoice = getHumanChoice();
-let computerChoice = getComputerChoice(1, 3);
-playRound(humanChoice, computerChoice);
+const Rock = document.getElementById("rock");
+Rock.addEventListener("click", function () {
+    playRound("rock");
+})
+
+const Paper = document.getElementById("paper");
+Paper.addEventListener("click", function () {
+    playRound("paper");
+})
+
+const Scissors = document.getElementById("scissors");
+Scissors.addEventListener("click", function () {
+    playRound("scissors");
+})
